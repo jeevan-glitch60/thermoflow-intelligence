@@ -1,0 +1,439 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+
+    /* Dark Mode Design Tokens (Default) */
+    --color-bg-base: #0a0e17;
+    --color-bg-surface: #101622;
+    --color-bg-card: #141c2c;
+    --color-bg-subtle: #192336;
+    --color-border: #233149;
+    --color-border-subtle: #1c273c;
+
+    --color-text-primary: #f8fafc;
+    --color-text-secondary: #cbd5e1;
+    --color-text-muted: #94a3b8;
+    --color-text-faint: #64748b;
+
+    /* Technical status colors (Dark mode tuned) */
+    --color-steam: #ea580c;
+    --color-heat: #ef4444;
+    --color-oil: #d4b483;
+    --color-water: #06b6d4;
+    --color-pressure: #3b82f6;
+    --color-srp-good: #10b981;
+    --color-srp-warn: #f59e0b;
+    --color-srp-crit: #f43f5e;
+    --color-telemetry: #8b5cf6;
+    --color-accent: #f59e0b;
+    --color-accent-subtle: rgba(245, 158, 11, 0.12);
+
+    /* Spacing & Radii (Enterprise industrial 4px–6px) */
+    --radius-card: 6px;
+    --radius-control: 4px;
+  }
+
+  /* Light Mode Design Tokens */
+  html:not(.dark),
+  [data-theme="light"] {
+    --color-bg-base: #f4f6f9;
+    --color-bg-surface: #ffffff;
+    --color-bg-card: #ffffff;
+    --color-bg-subtle: #f8fafc;
+    --color-border: #cbd5e1;
+    --color-border-subtle: #e2e8f0;
+
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #334155;
+    --color-text-muted: #64748b;
+    --color-text-faint: #94a3b8;
+
+    /* Technical status colors (Light mode high-contrast) */
+    --color-steam: #c2410c;
+    --color-heat: #dc2626;
+    --color-oil: #92400e;
+    --color-water: #0891b2;
+    --color-pressure: #2563eb;
+    --color-srp-good: #059669;
+    --color-srp-warn: #d97706;
+    --color-srp-crit: #e11d48;
+    --color-telemetry: #7c3aed;
+    --color-accent: #d97706;
+    --color-accent-subtle: rgba(217, 119, 6, 0.08);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg-base);
+    color: var(--color-text-primary);
+    overflow-x: hidden;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+    font-feature-settings: "tnum" 1, "zero" 1;
+  }
+
+  /* Enforce enterprise SCADA border-radius limits (max 6px) */
+  .rounded-2xl,
+  .rounded-xl {
+    border-radius: 6px !important;
+  }
+
+  .rounded-lg {
+    border-radius: 4px !important;
+  }
+
+  /* Custom technical scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0b0e14;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #233149;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #364867;
+  }
+}
+
+/* =========================================================================
+   LIGHT THEME OVERRIDES (High contrast, enterprise industrial standard)
+   ========================================================================= */
+
+html:not(.dark) body {
+  background-color: #f4f6f9 !important;
+  color: #0f172a !important;
+}
+
+/* Background surfaces */
+html:not(.dark) .bg-\[\#0a0d14\],
+html:not(.dark) .bg-\[\#0b0e14\],
+html:not(.dark) .bg-\[\#0d121c\] {
+  background-color: #f4f6f9 !important;
+}
+
+html:not(.dark) .bg-\[\#101622\] {
+  background-color: #ffffff !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+}
+
+html:not(.dark) .bg-\[\#151d2d\] {
+  background-color: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+
+html:not(.dark) .bg-\[\#1c273c\] {
+  background-color: #f1f5f9 !important;
+}
+
+html:not(.dark) .hover\:bg-\[\#151d2d\]:hover {
+  background-color: #f1f5f9 !important;
+}
+
+html:not(.dark) .hover\:bg-\[\#1c273c\]:hover {
+  background-color: #e2e8f0 !important;
+}
+
+html:not(.dark) .hover\:bg-\[\#283854\]:hover {
+  background-color: #cbd5e1 !important;
+}
+
+/* Border overrides */
+html:not(.dark) .border-\[\#233149\],
+html:not(.dark) .border-\[\#1c273c\],
+html:not(.dark) .border-\[\#192436\] {
+  border-color: #cbd5e1 !important;
+}
+
+html:not(.dark) .divide-\[\#233149\]\/50 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #e2e8f0 !important;
+}
+
+/* Typography contrast */
+html:not(.dark) .text-slate-100 {
+  color: #0f172a !important;
+}
+
+html:not(.dark) .text-slate-200 {
+  color: #1e293b !important;
+}
+
+html:not(.dark) .text-slate-300 {
+  color: #334155 !important;
+}
+
+html:not(.dark) .text-slate-400 {
+  color: #475569 !important;
+}
+
+html:not(.dark) .text-slate-500 {
+  color: #64748b !important;
+}
+
+html:not(.dark) .text-amber-200 {
+  color: #92400e !important;
+}
+
+html:not(.dark) .text-amber-300 {
+  color: #b45309 !important;
+}
+
+html:not(.dark) .text-amber-400 {
+  color: #c2410c !important;
+}
+
+/* Form Controls & Inputs */
+html:not(.dark) select,
+html:not(.dark) input,
+html:not(.dark) textarea {
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+html:not(.dark) select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Banner in Light Mode */
+html:not(.dark) .bg-amber-950\/80 {
+  background-color: #fef3c7 !important;
+  border-color: #fcd34d !important;
+  color: #92400e !important;
+}
+
+html:not(.dark) .bg-amber-950\/80 span,
+html:not(.dark) .bg-amber-950\/80 .text-amber-200,
+html:not(.dark) .bg-amber-950\/80 .text-amber-300,
+html:not(.dark) .bg-amber-950\/80 .text-amber-400 {
+  color: #92400e !important;
+}
+
+/* Sidebar navigation links in Light Mode */
+html:not(.dark) aside {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+html:not(.dark) aside a.active {
+  background-color: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #fcd34d !important;
+}
+
+html:not(.dark) aside a:not(.active) {
+  color: #475569 !important;
+}
+
+html:not(.dark) aside a:not(.active):hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Charts & Data Visualization in Light Mode */
+html:not(.dark) .recharts-default-tooltip {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+html:not(.dark) .recharts-tooltip-item {
+  color: #1e293b !important;
+}
+
+html:not(.dark) .recharts-cartesian-grid line {
+  stroke: #e2e8f0 !important;
+}
+
+html:not(.dark) .recharts-cartesian-axis-tick text {
+  fill: #64748b !important;
+}
+
+html:not(.dark) .recharts-legend-item-text {
+  color: #334155 !important;
+}
+
+/* Light mode scrollbar */
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Light mode technical grid background pattern */
+html:not(.dark) .bg-tech-grid {
+  background-image: 
+    linear-gradient(to right, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px) !important;
+}
+
+html:not(.dark) .bg-tech-dots {
+  background-image: radial-gradient(rgba(180, 83, 9, 0.15) 1px, transparent 1px) !important;
+}
+
+/* Light mode Hero gradient and digital twin schematic */
+html:not(.dark) header.bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, #ffffff, #f8fafc, #f1f5f9) !important;
+}
+
+html:not(.dark) svg.bg-\[\#0a0e17\]\/80 {
+  background-color: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+
+html:not(.dark) svg rect[fill="#151e2e"] {
+  fill: #ffffff !important;
+}
+
+html:not(.dark) svg rect[fill="#0f172a"] {
+  fill: #e2e8f0 !important;
+}
+
+html:not(.dark) svg text[fill="#f8fafc"] {
+  fill: #0f172a !important;
+}
+
+html:not(.dark) svg text[fill="#cbd5e1"] {
+  fill: #475569 !important;
+}
+
+html:not(.dark) svg text[fill="#94a3b8"] {
+  fill: #64748b !important;
+}
+
+html:not(.dark) svg text[fill="#fca5a5"] {
+  fill: #b91c1c !important;
+}
+
+/* =========================================================================
+   ANIMATIONS & SCADA DYNAMICS
+   ========================================================================= */
+
+@keyframes fluid-rise {
+  0% {
+    stroke-dashoffset: 40;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fluid-fall {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 40;
+  }
+}
+
+@keyframes steam-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes thermal-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(249, 115, 22, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.6));
+  }
+}
+
+.animate-steam-pulse {
+  animation: steam-pulse 3s ease-in-out infinite;
+}
+
+.animate-thermal-glow {
+  animation: thermal-glow 2.5s ease-in-out infinite;
+}
+
+.animate-fluid-flow {
+  stroke-dasharray: 6 4;
+  animation: fluid-rise 1.5s linear infinite;
+}
+
+.animate-fluid-flow-down {
+  stroke-dasharray: 6 4;
+  animation: fluid-fall 1.5s linear infinite;
+}
+
+/* Technical grid background pattern (Dark) */
+.bg-tech-grid {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.bg-tech-dots {
+  background-size: 16px 16px;
+  background-image: radial-gradient(rgba(212, 180, 131, 0.1) 1px, transparent 1px);
+}
+
+/* Micro-interactions & Industrial Hover Lift */
+.interactive-lift {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+}
+.interactive-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px -3px rgba(0, 0, 0, 0.22);
+}
+
+/* Button Press Tactile Feedback */
+.btn-press {
+  transition: transform 0.1s ease-out;
+}
+.btn-press:active {
+  transform: scale(0.98);
+}
+
+/* Subtle Industrial Alert Pulse (Calm breathing glow) */
+@keyframes alert-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.28);
+  }
+}
+
+.animate-alert-glow {
+  animation: alert-glow-pulse 2.8s ease-in-out infinite;
+}
+
+/* Reduced Motion Override (WCAG Accessibility Compliance) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
